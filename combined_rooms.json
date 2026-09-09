@@ -1,0 +1,2746 @@
+{
+  "meta": {
+    "semester": "Monsoon 2026",
+    "valid_from": "2026-09-07",
+    "valid_until": "2026-12-31",
+    "note": "Weekly recurring schedule merged across UG1-UG4. Does NOT apply on holidays, exam-period days, or day-order-swapped dates -- cross-check against calendar.json. Room codes for UG3 'ML1/ML2' vs 'ML' in UG2/other differ deliberately (different course codes in each section's curriculum) -- not an error.",
+    "self_study_rule": "Students are not permitted in lab rooms outside scheduled lab sessions, even when the room shows as free. Only rooms with self_study_allowed=true should be suggested for self-study.",
+    "slot_times": [
+      {
+        "start": "08:45",
+        "end": "09:45"
+      },
+      {
+        "start": "09:45",
+        "end": "10:45"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00"
+      },
+      {
+        "start": "14:15",
+        "end": "15:15"
+      },
+      {
+        "start": "15:15",
+        "end": "16:15"
+      },
+      {
+        "start": "16:30",
+        "end": "17:30"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30"
+      }
+    ]
+  },
+  "rooms": {
+    "G04": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "RANAC2"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DSP"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OS1"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DBMS2"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "RANAC3"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DSMA5"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OOP1"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DBMS1"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "PC4"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OS1"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ADSA1"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "VLSI"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "ADSA2"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD4"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OOP1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "RANAC2"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "FDFED1"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OS1"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "RANAC2"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "OOP1"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "VLSI"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "FDFED1"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "FDFED1"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "RANAC1"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "RANAC4"
+        },
+        {
+          "section": "UG1",
+          "day": "Saturday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EDL2"
+        },
+        {
+          "section": "UG1",
+          "day": "Saturday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EDL2"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G05": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OOP4"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "FDFED2"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DBMS1"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ADSA3"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ADSA2"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "RANAC3"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CS"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OOP2"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "IDA"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "IDA"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OS2"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ADSA3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CS"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OS2"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "FDFED3"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "FDFED3"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "IDA"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "IDA"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA1"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "RANAC3"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OS2"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OOP3"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "FDFED3"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "RANAC3"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "FDFED3"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "FDFED3"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "IDA"
+        },
+        {
+          "section": "UG4",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "IDA"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OOP3"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G06": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "RANAC1"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ADSA1"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CNA"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OS3"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "FDFED1"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "FDFED1"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CNA"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "RANAC2"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OS3"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DBMS2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "CP1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DBMS3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ADSA1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OOP3"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "RANAC4"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CNA"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DBMS1"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSP"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DBMS3"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DSP"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DBMS2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP3"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ES"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OOP2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EE1"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EE1"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "SE1"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "SE1"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G07": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA3"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DBMS3"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA4"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW3"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OOP4"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "FDFED2"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "FDFED2"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DLD3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "RANAC4"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA3"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA2"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ES"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "PC3"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP3"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD3"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA2"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OS1"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA1"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ADSA2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OCW3"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "PGP2"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "PGP2"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "PGP1"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "PGP1"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G08": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW4"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA2"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD2"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CP1"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CP3"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA3"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OCW4"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DSP"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA1"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "RANAC1"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CP2"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OOP4"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DLD2"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EE2"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EE2"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW1"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OOP2"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OCW4"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CP4"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OS3"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EDL1"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EDL1"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA5"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD3"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "ADSA3"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DSMA3"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "SE2"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "SE2"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G09": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD1"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "RANAC4"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "VLSI"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OCW2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD4"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DSMA2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CP2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DSMA4"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "VLSI"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OCW1"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA5"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DLD4"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA4"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "RANAC1"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP1"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD1"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA1"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA5"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "CS"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW1"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA4"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OCW2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CP4"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "QRA1"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "QRA2"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "QRA2"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "QRA4"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "QRA4"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "QRA3"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "QRA3"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "B03": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CS"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OS2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DLD1"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CP4"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ES"
+        },
+        {
+          "section": "UG4",
+          "day": "Saturday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OB1"
+        },
+        {
+          "section": "UG4",
+          "day": "Saturday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OB1"
+        },
+        {
+          "section": "UG4",
+          "day": "Saturday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OB2"
+        },
+        {
+          "section": "UG4",
+          "day": "Saturday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OB2"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "B05": {
+      "type": "lab",
+      "schedule": [
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "PC2"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "PC3"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "PC3"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "PC1"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "PC3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "PC4"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "PC1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "PC1"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW2"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "PC1"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "PC4"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "PC4"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "PC2"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "PC2"
+        }
+      ],
+      "self_study_allowed": false
+    },
+    "103": {
+      "type": "lab",
+      "schedule": [
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW1"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OCW1"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CP3"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP3"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW2"
+        },
+        {
+          "section": "UG1",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OCW2"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "OOP2"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "OOP2"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CP4"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP4"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OOP3"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OOP3"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW3"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OCW3"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "ADSA2"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "ADSA2"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CP1"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ADSA3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "ADSA3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OOP1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OOP1"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DBMS3"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "DBMS3"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW4"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OCW4"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CP2"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP2"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OOP4"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OOP4"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DBMS2"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "DBMS2"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "ADSA1"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ADSA1"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "FDFED2"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "FDFED2"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DBMS1"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DBMS1"
+        }
+      ],
+      "self_study_allowed": false
+    },
+    "114/102": {
+      "type": "lab",
+      "schedule": [
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DLD1"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DLD1"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD3"
+        },
+        {
+          "section": "UG1",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DLD3"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ES"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "ES"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DLD4"
+        },
+        {
+          "section": "UG1",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DLD4"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CNA"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CNA"
+        },
+        {
+          "section": "UG1",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DLD2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DLD2"
+        },
+        {
+          "section": "UG1",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DLD2"
+        }
+      ],
+      "self_study_allowed": false
+    },
+    "108": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "VAR"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "PDS"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "MCD"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "MPMC"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EP"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "MCD"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "PR"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "NLP"
+        },
+        {
+          "section": "UG2",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ML"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "NLP"
+        },
+        {
+          "section": "UG2",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ML"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "VAR"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "RI"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "IoTA"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "PR"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "NLP"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "IoTA"
+        },
+        {
+          "section": "UG4",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "VAR"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "PR"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "B04": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OS3"
+        },
+        {
+          "section": "UG2",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "PC2"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "109": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ML1"
+        },
+        {
+          "section": "UG2",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "ML"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OS"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "ML1"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ADL"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "IR"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DL&CV"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "BDA"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "BDA"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "IR"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ADL"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DL&CV"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ML1"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "AEM"
+        },
+        {
+          "section": "UG4",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "BDA"
+        },
+        {
+          "section": "UG4",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ADL"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "BDA"
+        },
+        {
+          "section": "UG4",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "BDA"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "IR"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OS"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "IoTA"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "BDA"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "PDS"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "AEM"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "111": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "BTA"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CD"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DE"
+        },
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ANN"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OS"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DE"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "HPC"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ANN"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "HPC"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CD"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DE"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "BTA"
+        },
+        {
+          "section": "UG2",
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "ML"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "HPC"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "BTA"
+        },
+        {
+          "section": "UG4",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ANN"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "110": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "ICS"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "ML2"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "MML"
+        },
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CRYPTO"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "ML2"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CC"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "PDS"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CC"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "MML"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OS"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "AE"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ML2"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ICS"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "EP"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CC"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "ICS"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "MML"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "GENAI"
+        },
+        {
+          "section": "UG4",
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "GENAI"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "105": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "EP"
+        },
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "GNN-AI"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "AEM"
+        },
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "RI"
+        },
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DSD"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CD"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "GNN-AI"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "MPMC"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "ICPS"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSD"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "GNN-AI"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ICPS"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "MCD"
+        },
+        {
+          "section": "UG4",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSD"
+        },
+        {
+          "section": "UG4",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DTCA"
+        },
+        {
+          "section": "UG4",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "RI"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "ICPS"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "GENAI"
+        },
+        {
+          "section": "UG3",
+          "day": "Saturday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "GENAI"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "112": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "FQC"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "ASM"
+        },
+        {
+          "section": "UG3",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "IDHV"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "FQC"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "GDIT"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DTCA"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DIP"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "GDIT"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "IDHV"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DTCA"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "FQC"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DIP"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "GDIT"
+        },
+        {
+          "section": "UG3",
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DIP"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "IDHV"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "ASM"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "104": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "section": "UG4",
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "AE"
+        },
+        {
+          "section": "UG3",
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "ASM"
+        },
+        {
+          "section": "UG4",
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CRYPTO"
+        },
+        {
+          "section": "UG4",
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CRYPTO"
+        },
+        {
+          "section": "UG3",
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "PDS"
+        },
+        {
+          "section": "UG4",
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "AE"
+        },
+        {
+          "section": "UG4",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DL&CV"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "114/104": {
+      "type": "lab",
+      "schedule": [
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "MPMC"
+        },
+        {
+          "section": "UG3",
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "MPMC"
+        }
+      ],
+      "self_study_allowed": false
+    }
+  },
+  "unresolved": [
+    {
+      "section": "UG1",
+      "day": "Saturday",
+      "start": "08:45",
+      "end": "16:15",
+      "course": "FHVE",
+      "note": "All 5 UG1 sections have FHVE on Saturdays; room not specified on timetable."
+    },
+    {
+      "raw_label": "GENAI (UG4, Saturday)",
+      "issue": "Room not specified on UG4 timetable for Saturday GENAI sessions."
+    },
+    {
+      "raw_label": "114/102 and 114/104",
+      "issue": "Sheet lists these as combined/split lab codes across sections -- unclear if these are two rooms used together or a single dual-numbered lab. Unverified."
+    }
+  ]
+}

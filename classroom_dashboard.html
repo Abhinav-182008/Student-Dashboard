@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Block — Room Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --ink:#232920;
+    --ink-soft:#5E655A;
+    --line:#DCD5C4;
+    --line-strong:#B9B09A;
+    --free:#3E6E52;
+    --free-bg:#E5EEE4;
+    --occupied:#A0453B;
+    --occupied-bg:#F2E3DF;
+    --lab:#4C5C68;
+    --lab-bg:#E5E9EB;
+    --now:#C99A2E;
+    --now-bg:#FBF1D8;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  header{
+    padding:26px 20px 22px; border-bottom:1px solid var(--line);
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;
+  }
+  header h1{margin:0; font-size:1.55rem; font-weight:600; letter-spacing:-0.01em;}
+  .clock{
+    font-family:'IBM Plex Mono',monospace; font-size:0.95rem; color:var(--ink);
+    border:1px solid var(--line-strong); background:var(--card);
+    padding:7px 14px; border-radius:3px; font-variant-numeric:tabular-nums;
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding:0 20px;}
+  .banner{
+    margin:18px auto 0; max-width:960px; border:1px solid var(--line); border-left:4px solid var(--occupied);
+    background:var(--card); padding:12px 16px; font-size:0.92rem; line-height:1.5;
+  }
+  .banner.swap{border-left-color:var(--now);}
+  .banner.holiday{border-left-color:var(--free);}
+  .banner strong{font-weight:600;}
+  section.free-now{max-width:960px; margin:34px auto 0; padding-bottom:34px; border-bottom:1px solid var(--line);}
+  section.free-now h2{font-size:1.05rem; margin:0 0 12px; font-weight:600;}
+  .free-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border:1px solid var(--free); color:var(--free); background:var(--free-bg);
+    padding:6px 13px; border-radius:3px; font-size:0.88rem; font-weight:500; cursor:pointer;
+    font-family:'IBM Plex Sans',sans-serif;
+  }
+  .chip.lab{border-color:var(--lab); color:var(--lab); background:var(--lab-bg);}
+  .chip:hover{filter:brightness(0.96);}
+  .empty-note{color:var(--ink-soft); font-size:0.9rem;}
+  main{max-width:960px; margin:34px auto 60px;}
+  main h2{font-size:1.05rem; font-weight:600; margin:0 0 14px; padding-bottom:9px; border-bottom:1px solid var(--line);}
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px;
+  }
+  .room-card{
+    border:1px solid var(--line); background:var(--card); padding:13px 15px; text-align:left;
+    cursor:pointer; font-family:inherit; color:inherit; position:relative; transition:border-color .12s ease;
+  }
+  .room-card:hover{border-color:var(--line-strong);}
+  .room-card:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+  .room-code{font-family:'Fraunces',serif; font-size:1.35rem; font-weight:700; display:block;}
+  .type-badge{
+    display:inline-block; margin-top:6px; font-size:0.76rem; font-weight:700;
+    letter-spacing:0.02em;
+  }
+  .type-badge.classroom{color:#7A5B1E;}
+  .type-badge.lab{color:var(--lab);}
+  .status.restricted{background:#E7E2D6; color:#6B6146;}
+  .status{
+    display:inline-block; margin-top:11px; font-size:0.82rem; font-weight:600; padding:3px 9px; border-radius:2px;
+  }
+  .status.free{background:var(--free-bg); color:var(--free);}
+  .status.occupied{background:var(--occupied-bg); color:var(--occupied);}
+  .until{display:block; margin-top:5px; font-size:0.76rem; color:var(--ink-soft);}
+  /* Modal */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,22,18,0.48); display:none;
+    align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto; z-index:10;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--card); max-width:660px; width:100%; border:1px solid var(--line);
+    padding:26px 28px 28px; margin-bottom:40px;
+  }
+  .modal-head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; border-bottom:1px solid var(--line); padding-bottom:15px; margin-bottom:18px;}
+  .modal-head h3{margin:0; font-size:1.55rem;}
+  .modal-head .type-badge{margin-top:6px;}
+  .close-btn{background:none; border:1px solid var(--line); width:30px; height:30px; cursor:pointer; font-size:1rem; color:var(--ink-soft); flex:none; border-radius:3px;}
+  .close-btn:hover{border-color:var(--ink); color:var(--ink);}
+  .copy-btn{
+    border:1px solid var(--line-strong); background:var(--card); color:var(--ink-soft);
+    font-size:0.76rem; padding:2px 9px; border-radius:3px; cursor:pointer; margin-left:4px;
+    font-family:'IBM Plex Sans',sans-serif;
+  }
+  .copy-btn:hover{border-color:var(--ink); color:var(--ink);}
+  .note-box{
+    border:1px solid var(--line); padding:11px 13px; font-size:0.87rem; margin-bottom:18px; line-height:1.55;
+  }
+  .note-box.lab{background:var(--lab-bg); border-color:var(--lab); color:#2E3941;}
+  .note-box.holiday{background:var(--free-bg); border-color:var(--free); color:#274536;}
+  .note-box.exam{background:var(--now-bg); border-color:var(--now); color:#5A4310;}
+  .note-box.restricted{background:#EFEBE0; border-color:#8A7F63; color:#4F4838;}
+  table.week{width:100%; border-collapse:collapse; font-size:0.84rem;}
+  table.week th, table.week td{border:1px solid var(--line); padding:7px 8px; text-align:left; vertical-align:top;}
+  table.week th{background:#EFEADC; font-weight:600; font-size:0.77rem;}
+  table.week th.today-col{background:#E7E0C9;}
+  table.week td.slot-time{white-space:nowrap; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); font-size:0.74rem; background:#FBFAF6;}
+  tr:nth-child(even) td{background:#FBFAF6;}
+  tr:nth-child(even) td.slot-time{background:#F5F2E9;}
+  .entry{display:block; line-height:1.4;}
+  .entry .sec{color:var(--ink-soft); font-size:0.74rem;}
+  td.now-cell{background:var(--now-bg) !important; box-shadow:inset 0 0 0 2px var(--now);}
+  td.now-time{background:var(--now-bg) !important; color:#5A4310; font-weight:600;}
+  footer{max-width:960px; margin:0 auto 50px; padding:18px 20px 0; border-top:1px solid var(--line); color:var(--ink-soft); font-size:0.8rem; line-height:1.65;}
+  footer a{color:var(--ink-soft); text-decoration:underline;}
+  footer a:hover{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Academic Block — Room Status</h1>
+  <div class="clock" id="clock"></div>
+</header>
+
+<div id="banners"></div>
+
+<section class="free-now wrap">
+  <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+    <h2 style="margin:0;">Free right now</h2>
+    <label style="font-size:0.85rem; color:var(--ink-soft);">
+      Free for at least
+      <select id="hoursFilter" style="font-family:'IBM Plex Sans',sans-serif; font-size:0.85rem; border:1px solid var(--line-strong); border-radius:3px; padding:4px 8px; margin-left:6px; background:var(--card); color:var(--ink);">
+        <option value="0">any duration</option>
+        <option value="60">1 hour</option>
+        <option value="120">2 hours</option>
+        <option value="180">3 hours</option>
+      </select>
+    </label>
+  </div>
+  <div class="free-list" id="freeList"></div>
+</section>
+
+<main class="wrap">
+  <h2>All rooms</h2>
+  <div class="grid" id="roomGrid"></div>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer>
+  Based on the Monsoon 2026 timetable (UG1–UG4), transcribed manually — not a live feed. Doesn't reflect makeup classes, cancellations, or room reassignments.
+  Holiday and day-order-swap dates come from the UG1 almanac and are assumed college-wide until confirmed otherwise. Exam-period suspension is currently tracked for UG1 only —
+  other sections may have exams on dates not reflected here. Three room codes (UG1/UG4 Saturday rooms for FHVE and GEN-AI, and the 114/102 vs 114/104 dual-lab codes) are left
+  unresolved and excluded below pending confirmation.
+  <br>Spotted something off? Email <strong>abhinav.pm26@iiits.in</strong>.
+</footer>
+
+<script>
+const ROOMS = {"meta": {"semester": "Monsoon 2026", "valid_from": "2026-09-07", "valid_until": "2026-12-31", "note": "Weekly recurring schedule merged across UG1-UG4. Does NOT apply on holidays, exam-period days, or day-order-swapped dates -- cross-check against calendar.json. Room codes for UG3 'ML1/ML2' vs 'ML' in UG2/other differ deliberately (different course codes in each section's curriculum) -- not an error.", "self_study_rule": "Students are not permitted in lab rooms outside scheduled lab sessions, even when the room shows as free. Only rooms with self_study_allowed=true should be suggested for self-study.", "slot_times": [{"start": "08:45", "end": "09:45"}, {"start": "09:45", "end": "10:45"}, {"start": "11:00", "end": "12:00"}, {"start": "12:00", "end": "13:00"}, {"start": "14:15", "end": "15:15"}, {"start": "15:15", "end": "16:15"}, {"start": "16:30", "end": "17:30"}, {"start": "17:30", "end": "18:30"}]}, "rooms": {"G04": {"type": "lab", "schedule": [{"section": "UG2", "day": "Monday", "start": "09:45", "end": "10:45", "course": "RANAC2"}, {"section": "UG3", "day": "Monday", "start": "11:00", "end": "12:00", "course": "DSP"}, {"section": "UG2", "day": "Monday", "start": "12:00", "end": "13:00", "course": "OS1"}, {"section": "UG2", "day": "Monday", "start": "14:15", "end": "15:15", "course": "DBMS2"}, {"section": "UG2", "day": "Monday", "start": "15:15", "end": "16:15", "course": "RANAC3"}, {"section": "UG1", "day": "Monday", "start": "16:30", "end": "17:30", "course": "DSMA5"}, {"section": "UG2", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "OOP1"}, {"section": "UG2", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "DBMS1"}, {"section": "UG2", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "PC4"}, {"section": "UG2", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "OS1"}, {"section": "UG2", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "ADSA1"}, {"section": "UG3", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "VLSI"}, {"section": "UG2", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "ADSA2"}, {"section": "UG1", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "DLD4"}, {"section": "UG2", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "OOP1"}, {"section": "UG2", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "RANAC2"}, {"section": "UG3", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "FDFED1"}, {"section": "UG2", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "OS1"}, {"section": "UG2", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "RANAC2"}, {"section": "UG2", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "OOP1"}, {"section": "UG3", "day": "Friday", "start": "09:45", "end": "10:45", "course": "VLSI"}, {"section": "UG3", "day": "Friday", "start": "11:00", "end": "12:00", "course": "FDFED1"}, {"section": "UG3", "day": "Friday", "start": "12:00", "end": "13:00", "course": "FDFED1"}, {"section": "UG2", "day": "Friday", "start": "14:15", "end": "15:15", "course": "RANAC1"}, {"section": "UG2", "day": "Friday", "start": "15:15", "end": "16:15", "course": "RANAC4"}, {"section": "UG1", "day": "Saturday", "start": "16:30", "end": "17:30", "course": "EDL2"}, {"section": "UG1", "day": "Saturday", "start": "17:30", "end": "18:30", "course": "EDL2"}], "self_study_allowed": false}, "G05": {"type": "lab", "schedule": [{"section": "UG2", "day": "Monday", "start": "08:45", "end": "09:45", "course": "OOP4"}, {"section": "UG3", "day": "Monday", "start": "09:45", "end": "10:45", "course": "FDFED2"}, {"section": "UG2", "day": "Monday", "start": "11:00", "end": "12:00", "course": "DBMS1"}, {"section": "UG2", "day": "Monday", "start": "14:15", "end": "15:15", "course": "ADSA3"}, {"section": "UG2", "day": "Monday", "start": "15:15", "end": "16:15", "course": "ADSA2"}, {"section": "UG2", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "RANAC3"}, {"section": "UG2", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "CS"}, {"section": "UG2", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "OOP2"}, {"section": "UG3", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "IDA"}, {"section": "UG4", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "IDA"}, {"section": "UG2", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "OS2"}, {"section": "UG2", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "ADSA3"}, {"section": "UG2", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "CS"}, {"section": "UG2", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "OS2"}, {"section": "UG3", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "FDFED3"}, {"section": "UG3", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "FDFED3"}, {"section": "UG3", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "IDA"}, {"section": "UG4", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "IDA"}, {"section": "UG1", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "DSMA1"}, {"section": "UG2", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "RANAC3"}, {"section": "UG2", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "OS2"}, {"section": "UG2", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "OOP3"}, {"section": "UG3", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "FDFED3"}, {"section": "UG2", "day": "Friday", "start": "08:45", "end": "09:45", "course": "RANAC3"}, {"section": "UG3", "day": "Friday", "start": "11:00", "end": "12:00", "course": "FDFED3"}, {"section": "UG3", "day": "Friday", "start": "12:00", "end": "13:00", "course": "FDFED3"}, {"section": "UG3", "day": "Friday", "start": "14:15", "end": "15:15", "course": "IDA"}, {"section": "UG4", "day": "Friday", "start": "14:15", "end": "15:15", "course": "IDA"}, {"section": "UG2", "day": "Friday", "start": "15:15", "end": "16:15", "course": "OOP3"}], "self_study_allowed": false}, "G06": {"type": "classroom", "schedule": [{"section": "UG2", "day": "Monday", "start": "08:45", "end": "09:45", "course": "RANAC1"}, {"section": "UG2", "day": "Monday", "start": "09:45", "end": "10:45", "course": "ADSA1"}, {"section": "UG2", "day": "Monday", "start": "11:00", "end": "12:00", "course": "CNA"}, {"section": "UG2", "day": "Monday", "start": "12:00", "end": "13:00", "course": "OS3"}, {"section": "UG3", "day": "Monday", "start": "14:15", "end": "15:15", "course": "FDFED1"}, {"section": "UG3", "day": "Monday", "start": "15:15", "end": "16:15", "course": "FDFED1"}, {"section": "UG2", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "CNA"}, {"section": "UG2", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "RANAC2"}, {"section": "UG2", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "OS3"}, {"section": "UG2", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "DBMS2"}, {"section": "UG1", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "CP1"}, {"section": "UG2", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "DBMS3"}, {"section": "UG2", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "ADSA1"}, {"section": "UG2", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "OOP3"}, {"section": "UG2", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "RANAC4"}, {"section": "UG2", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "CNA"}, {"section": "UG2", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "DBMS1"}, {"section": "UG3", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "DSP"}, {"section": "UG2", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "DBMS3"}, {"section": "UG3", "day": "Friday", "start": "08:45", "end": "09:45", "course": "DSP"}, {"section": "UG2", "day": "Friday", "start": "11:00", "end": "12:00", "course": "DBMS2"}, {"section": "UG1", "day": "Friday", "start": "12:00", "end": "13:00", "course": "CP3"}, {"section": "UG2", "day": "Friday", "start": "14:15", "end": "15:15", "course": "ES"}, {"section": "UG2", "day": "Friday", "start": "15:15", "end": "16:15", "course": "OOP2"}, {"section": "UG1", "day": "Friday", "start": "16:30", "end": "17:30", "course": "EE1"}, {"section": "UG1", "day": "Friday", "start": "17:30", "end": "18:30", "course": "EE1"}, {"section": "UG3", "day": "Saturday", "start": "11:00", "end": "12:00", "course": "SE1"}, {"section": "UG3", "day": "Saturday", "start": "12:00", "end": "13:00", "course": "SE1"}], "self_study_allowed": true}, "G07": {"type": "classroom", "schedule": [{"section": "UG1", "day": "Monday", "start": "09:45", "end": "10:45", "course": "DSMA3"}, {"section": "UG2", "day": "Monday", "start": "11:00", "end": "12:00", "course": "DBMS3"}, {"section": "UG1", "day": "Monday", "start": "12:00", "end": "13:00", "course": "DSMA4"}, {"section": "UG1", "day": "Monday", "start": "14:15", "end": "15:15", "course": "OCW3"}, {"section": "UG2", "day": "Monday", "start": "15:15", "end": "16:15", "course": "OOP4"}, {"section": "UG3", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "FDFED2"}, {"section": "UG3", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "FDFED2"}, {"section": "UG1", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "DLD3"}, {"section": "UG2", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "RANAC4"}, {"section": "UG1", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "DSMA3"}, {"section": "UG1", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "DSMA2"}, {"section": "UG2", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "ES"}, {"section": "UG2", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "PC3"}, {"section": "UG1", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "CP3"}, {"section": "UG1", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "DLD3"}, {"section": "UG1", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "DSMA2"}, {"section": "UG1", "day": "Friday", "start": "09:45", "end": "10:45", "course": "DSMA2"}, {"section": "UG2", "day": "Friday", "start": "11:00", "end": "12:00", "course": "OS1"}, {"section": "UG1", "day": "Friday", "start": "12:00", "end": "13:00", "course": "DSMA1"}, {"section": "UG2", "day": "Friday", "start": "14:15", "end": "15:15", "course": "ADSA2"}, {"section": "UG1", "day": "Friday", "start": "15:15", "end": "16:15", "course": "OCW3"}, {"section": "UG3", "day": "Saturday", "start": "08:45", "end": "09:45", "course": "PGP2"}, {"section": "UG3", "day": "Saturday", "start": "09:45", "end": "10:45", "course": "PGP2"}, {"section": "UG3", "day": "Saturday", "start": "11:00", "end": "12:00", "course": "PGP1"}, {"section": "UG3", "day": "Saturday", "start": "12:00", "end": "13:00", "course": "PGP1"}], "self_study_allowed": true}, "G08": {"type": "classroom", "schedule": [{"section": "UG1", "day": "Monday", "start": "08:45", "end": "09:45", "course": "OCW4"}, {"section": "UG1", "day": "Monday", "start": "09:45", "end": "10:45", "course": "DSMA2"}, {"section": "UG1", "day": "Monday", "start": "11:00", "end": "12:00", "course": "DLD2"}, {"section": "UG1", "day": "Monday", "start": "14:15", "end": "15:15", "course": "CP1"}, {"section": "UG1", "day": "Monday", "start": "15:15", "end": "16:15", "course": "CP3"}, {"section": "UG1", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "DSMA3"}, {"section": "UG1", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "DLD2"}, {"section": "UG1", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "OCW4"}, {"section": "UG3", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "DSP"}, {"section": "UG1", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "DSMA1"}, {"section": "UG2", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "RANAC1"}, {"section": "UG1", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "CP2"}, {"section": "UG2", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "OOP4"}, {"section": "UG1", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "DLD2"}, {"section": "UG1", "day": "Wednesday", "start": "16:30", "end": "17:30", "course": "EE2"}, {"section": "UG1", "day": "Wednesday", "start": "17:30", "end": "18:30", "course": "EE2"}, {"section": "UG1", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "OCW1"}, {"section": "UG2", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "OOP2"}, {"section": "UG1", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "OCW4"}, {"section": "UG1", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "CP4"}, {"section": "UG2", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "OS3"}, {"section": "UG1", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "EDL1"}, {"section": "UG1", "day": "Thursday", "start": "17:30", "end": "18:30", "course": "EDL1"}, {"section": "UG1", "day": "Friday", "start": "09:45", "end": "10:45", "course": "DSMA5"}, {"section": "UG1", "day": "Friday", "start": "11:00", "end": "12:00", "course": "DLD3"}, {"section": "UG2", "day": "Friday", "start": "12:00", "end": "13:00", "course": "ADSA3"}, {"section": "UG1", "day": "Friday", "start": "14:15", "end": "15:15", "course": "DSMA3"}, {"section": "UG3", "day": "Saturday", "start": "11:00", "end": "12:00", "course": "SE2"}, {"section": "UG3", "day": "Saturday", "start": "12:00", "end": "13:00", "course": "SE2"}], "self_study_allowed": true}, "G09": {"type": "classroom", "schedule": [{"section": "UG1", "day": "Monday", "start": "11:00", "end": "12:00", "course": "DLD1"}, {"section": "UG2", "day": "Monday", "start": "14:15", "end": "15:15", "course": "RANAC4"}, {"section": "UG3", "day": "Monday", "start": "15:15", "end": "16:15", "course": "VLSI"}, {"section": "UG1", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "OCW2"}, {"section": "UG1", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "DLD4"}, {"section": "UG1", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "DSMA2"}, {"section": "UG1", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "CP2"}, {"section": "UG1", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "DSMA4"}, {"section": "UG3", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "VLSI"}, {"section": "UG1", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "OCW1"}, {"section": "UG1", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "DSMA5"}, {"section": "UG1", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "DLD4"}, {"section": "UG1", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "DSMA4"}, {"section": "UG2", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "RANAC1"}, {"section": "UG1", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "CP1"}, {"section": "UG1", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "DLD1"}, {"section": "UG1", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "DSMA1"}, {"section": "UG1", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "DSMA5"}, {"section": "UG2", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "CS"}, {"section": "UG1", "day": "Friday", "start": "08:45", "end": "09:45", "course": "OCW1"}, {"section": "UG1", "day": "Friday", "start": "09:45", "end": "10:45", "course": "DSMA4"}, {"section": "UG1", "day": "Friday", "start": "11:00", "end": "12:00", "course": "OCW2"}, {"section": "UG1", "day": "Friday", "start": "12:00", "end": "13:00", "course": "CP2"}, {"section": "UG1", "day": "Friday", "start": "14:15", "end": "15:15", "course": "CP4"}, {"section": "UG3", "day": "Friday", "start": "16:30", "end": "17:30", "course": "QRA1"}, {"section": "UG3", "day": "Saturday", "start": "08:45", "end": "09:45", "course": "QRA2"}, {"section": "UG3", "day": "Saturday", "start": "09:45", "end": "10:45", "course": "QRA2"}, {"section": "UG3", "day": "Saturday", "start": "11:00", "end": "12:00", "course": "QRA4"}, {"section": "UG3", "day": "Saturday", "start": "12:00", "end": "13:00", "course": "QRA4"}, {"section": "UG3", "day": "Saturday", "start": "14:15", "end": "15:15", "course": "QRA3"}, {"section": "UG3", "day": "Saturday", "start": "15:15", "end": "16:15", "course": "QRA3"}], "self_study_allowed": true}, "B03": {"type": "classroom", "schedule": [{"section": "UG2", "day": "Monday", "start": "09:45", "end": "10:45", "course": "CS"}, {"section": "UG2", "day": "Monday", "start": "11:00", "end": "12:00", "course": "OS2"}, {"section": "UG1", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "DLD1"}, {"section": "UG1", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "CP4"}, {"section": "UG2", "day": "Friday", "start": "11:00", "end": "12:00", "course": "ES"}, {"section": "UG4", "day": "Saturday", "start": "08:45", "end": "09:45", "course": "OB1"}, {"section": "UG4", "day": "Saturday", "start": "09:45", "end": "10:45", "course": "OB1"}, {"section": "UG4", "day": "Saturday", "start": "11:00", "end": "12:00", "course": "OB2"}, {"section": "UG4", "day": "Saturday", "start": "12:00", "end": "13:00", "course": "OB2"}], "self_study_allowed": true}, "B05": {"type": "lab", "schedule": [{"section": "UG2", "day": "Monday", "start": "08:45", "end": "09:45", "course": "PC2"}, {"section": "UG2", "day": "Monday", "start": "16:30", "end": "17:30", "course": "PC3"}, {"section": "UG2", "day": "Monday", "start": "17:30", "end": "18:30", "course": "PC3"}, {"section": "UG2", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "PC1"}, {"section": "UG2", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "PC3"}, {"section": "UG2", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "PC4"}, {"section": "UG2", "day": "Wednesday", "start": "16:30", "end": "17:30", "course": "PC1"}, {"section": "UG2", "day": "Wednesday", "start": "17:30", "end": "18:30", "course": "PC1"}, {"section": "UG1", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "OCW2"}, {"section": "UG2", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "PC1"}, {"section": "UG2", "day": "Friday", "start": "08:45", "end": "09:45", "course": "PC4"}, {"section": "UG2", "day": "Friday", "start": "09:45", "end": "10:45", "course": "PC4"}, {"section": "UG2", "day": "Friday", "start": "16:30", "end": "17:30", "course": "PC2"}, {"section": "UG2", "day": "Friday", "start": "17:30", "end": "18:30", "course": "PC2"}], "self_study_allowed": false}, "103": {"type": "lab", "schedule": [{"section": "UG1", "day": "Monday", "start": "08:45", "end": "09:45", "course": "OCW1"}, {"section": "UG1", "day": "Monday", "start": "09:45", "end": "10:45", "course": "OCW1"}, {"section": "UG1", "day": "Monday", "start": "11:00", "end": "12:00", "course": "CP3"}, {"section": "UG1", "day": "Monday", "start": "12:00", "end": "13:00", "course": "CP3"}, {"section": "UG1", "day": "Monday", "start": "14:15", "end": "15:15", "course": "OCW2"}, {"section": "UG1", "day": "Monday", "start": "15:15", "end": "16:15", "course": "OCW2"}, {"section": "UG2", "day": "Monday", "start": "16:30", "end": "17:30", "course": "OOP2"}, {"section": "UG2", "day": "Monday", "start": "17:30", "end": "18:30", "course": "OOP2"}, {"section": "UG1", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "CP4"}, {"section": "UG1", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "CP4"}, {"section": "UG2", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "OOP3"}, {"section": "UG2", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "OOP3"}, {"section": "UG1", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "OCW3"}, {"section": "UG1", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "OCW3"}, {"section": "UG2", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "ADSA2"}, {"section": "UG2", "day": "Tuesday", "start": "17:30", "end": "18:30", "course": "ADSA2"}, {"section": "UG1", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "CP1"}, {"section": "UG1", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "CP1"}, {"section": "UG2", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "ADSA3"}, {"section": "UG2", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "ADSA3"}, {"section": "UG2", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "OOP1"}, {"section": "UG2", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "OOP1"}, {"section": "UG2", "day": "Wednesday", "start": "16:30", "end": "17:30", "course": "DBMS3"}, {"section": "UG2", "day": "Wednesday", "start": "17:30", "end": "18:30", "course": "DBMS3"}, {"section": "UG1", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "OCW4"}, {"section": "UG1", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "OCW4"}, {"section": "UG1", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "CP2"}, {"section": "UG1", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "CP2"}, {"section": "UG2", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "OOP4"}, {"section": "UG2", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "OOP4"}, {"section": "UG2", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "DBMS2"}, {"section": "UG2", "day": "Thursday", "start": "17:30", "end": "18:30", "course": "DBMS2"}, {"section": "UG2", "day": "Friday", "start": "08:45", "end": "09:45", "course": "ADSA1"}, {"section": "UG2", "day": "Friday", "start": "09:45", "end": "10:45", "course": "ADSA1"}, {"section": "UG3", "day": "Friday", "start": "11:00", "end": "12:00", "course": "FDFED2"}, {"section": "UG3", "day": "Friday", "start": "12:00", "end": "13:00", "course": "FDFED2"}, {"section": "UG2", "day": "Friday", "start": "15:15", "end": "16:15", "course": "DBMS1"}, {"section": "UG2", "day": "Friday", "start": "16:30", "end": "17:30", "course": "DBMS1"}], "self_study_allowed": false}, "114/102": {"type": "lab", "schedule": [{"section": "UG1", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "DLD1"}, {"section": "UG1", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "DLD1"}, {"section": "UG1", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "DLD3"}, {"section": "UG1", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "DLD3"}, {"section": "UG2", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "ES"}, {"section": "UG2", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "ES"}, {"section": "UG1", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "DLD4"}, {"section": "UG1", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "DLD4"}, {"section": "UG2", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "CNA"}, {"section": "UG2", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "CNA"}, {"section": "UG1", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "DLD2"}, {"section": "UG1", "day": "Friday", "start": "14:15", "end": "15:15", "course": "DLD2"}, {"section": "UG1", "day": "Friday", "start": "15:15", "end": "16:15", "course": "DLD2"}], "self_study_allowed": false}, "108": {"type": "classroom", "schedule": [{"section": "UG4", "day": "Monday", "start": "09:45", "end": "10:45", "course": "VAR"}, {"section": "UG3", "day": "Monday", "start": "11:00", "end": "12:00", "course": "PDS"}, {"section": "UG3", "day": "Monday", "start": "12:00", "end": "13:00", "course": "MCD"}, {"section": "UG3", "day": "Monday", "start": "14:15", "end": "15:15", "course": "MPMC"}, {"section": "UG3", "day": "Monday", "start": "16:30", "end": "17:30", "course": "EP"}, {"section": "UG3", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "MCD"}, {"section": "UG3", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "PR"}, {"section": "UG3", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "NLP"}, {"section": "UG2", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "ML"}, {"section": "UG3", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "NLP"}, {"section": "UG2", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "ML"}, {"section": "UG4", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "VAR"}, {"section": "UG4", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "RI"}, {"section": "UG3", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "IoTA"}, {"section": "UG3", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "PR"}, {"section": "UG3", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "NLP"}, {"section": "UG3", "day": "Friday", "start": "08:45", "end": "09:45", "course": "IoTA"}, {"section": "UG4", "day": "Friday", "start": "09:45", "end": "10:45", "course": "VAR"}, {"section": "UG3", "day": "Friday", "start": "15:15", "end": "16:15", "course": "PR"}], "self_study_allowed": true}, "B04": {"type": "classroom", "schedule": [{"section": "UG2", "day": "Friday", "start": "09:45", "end": "10:45", "course": "OS3"}, {"section": "UG2", "day": "Friday", "start": "12:00", "end": "13:00", "course": "PC2"}], "self_study_allowed": true}, "109": {"type": "classroom", "schedule": [{"section": "UG3", "day": "Monday", "start": "11:00", "end": "12:00", "course": "ML1"}, {"section": "UG2", "day": "Monday", "start": "12:00", "end": "13:00", "course": "ML"}, {"section": "UG3", "day": "Monday", "start": "15:15", "end": "16:15", "course": "OS"}, {"section": "UG3", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "ML1"}, {"section": "UG4", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "ADL"}, {"section": "UG3", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "IR"}, {"section": "UG4", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "DL&CV"}, {"section": "UG3", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "BDA"}, {"section": "UG4", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "BDA"}, {"section": "UG3", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "IR"}, {"section": "UG4", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "ADL"}, {"section": "UG4", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "DL&CV"}, {"section": "UG3", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "ML1"}, {"section": "UG3", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "AEM"}, {"section": "UG4", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "BDA"}, {"section": "UG4", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "ADL"}, {"section": "UG3", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "BDA"}, {"section": "UG4", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "BDA"}, {"section": "UG3", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "IR"}, {"section": "UG3", "day": "Thursday", "start": "15:15", "end": "16:15", "course": "OS"}, {"section": "UG3", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "IoTA"}, {"section": "UG3", "day": "Friday", "start": "08:45", "end": "09:45", "course": "BDA"}, {"section": "UG3", "day": "Friday", "start": "11:00", "end": "12:00", "course": "PDS"}, {"section": "UG3", "day": "Friday", "start": "15:15", "end": "16:15", "course": "AEM"}], "self_study_allowed": true}, "111": {"type": "classroom", "schedule": [{"section": "UG3", "day": "Monday", "start": "08:45", "end": "09:45", "course": "BTA"}, {"section": "UG3", "day": "Monday", "start": "11:00", "end": "12:00", "course": "CD"}, {"section": "UG3", "day": "Monday", "start": "12:00", "end": "13:00", "course": "DE"}, {"section": "UG4", "day": "Monday", "start": "15:15", "end": "16:15", "course": "ANN"}, {"section": "UG3", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "OS"}, {"section": "UG3", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "DE"}, {"section": "UG3", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "HPC"}, {"section": "UG4", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "ANN"}, {"section": "UG3", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "HPC"}, {"section": "UG3", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "CD"}, {"section": "UG3", "day": "Thursday", "start": "08:45", "end": "09:45", "course": "DE"}, {"section": "UG3", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "BTA"}, {"section": "UG2", "day": "Thursday", "start": "12:00", "end": "13:00", "course": "ML"}, {"section": "UG3", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "HPC"}, {"section": "UG3", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "BTA"}, {"section": "UG4", "day": "Friday", "start": "11:00", "end": "12:00", "course": "ANN"}], "self_study_allowed": true}, "110": {"type": "classroom", "schedule": [{"section": "UG3", "day": "Monday", "start": "08:45", "end": "09:45", "course": "ICS"}, {"section": "UG3", "day": "Monday", "start": "11:00", "end": "12:00", "course": "ML2"}, {"section": "UG3", "day": "Monday", "start": "12:00", "end": "13:00", "course": "MML"}, {"section": "UG4", "day": "Monday", "start": "14:15", "end": "15:15", "course": "CRYPTO"}, {"section": "UG3", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "ML2"}, {"section": "UG3", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "CC"}, {"section": "UG3", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "PDS"}, {"section": "UG3", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "CC"}, {"section": "UG3", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "MML"}, {"section": "UG3", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "OS"}, {"section": "UG4", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "AE"}, {"section": "UG3", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "ML2"}, {"section": "UG3", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "ICS"}, {"section": "UG3", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "EP"}, {"section": "UG3", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "CC"}, {"section": "UG3", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "ICS"}, {"section": "UG3", "day": "Friday", "start": "09:45", "end": "10:45", "course": "MML"}, {"section": "UG3", "day": "Friday", "start": "16:30", "end": "17:30", "course": "GENAI"}, {"section": "UG4", "day": "Friday", "start": "16:30", "end": "17:30", "course": "GENAI"}], "self_study_allowed": true}, "105": {"type": "classroom", "schedule": [{"section": "UG3", "day": "Monday", "start": "08:45", "end": "09:45", "course": "EP"}, {"section": "UG4", "day": "Monday", "start": "09:45", "end": "10:45", "course": "GNN-AI"}, {"section": "UG3", "day": "Monday", "start": "12:00", "end": "13:00", "course": "AEM"}, {"section": "UG4", "day": "Monday", "start": "15:15", "end": "16:15", "course": "RI"}, {"section": "UG4", "day": "Monday", "start": "16:30", "end": "17:30", "course": "DSD"}, {"section": "UG3", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "CD"}, {"section": "UG4", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "GNN-AI"}, {"section": "UG3", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "MPMC"}, {"section": "UG3", "day": "Tuesday", "start": "12:00", "end": "13:00", "course": "ICPS"}, {"section": "UG4", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "DSD"}, {"section": "UG4", "day": "Wednesday", "start": "11:00", "end": "12:00", "course": "GNN-AI"}, {"section": "UG3", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "ICPS"}, {"section": "UG3", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "MCD"}, {"section": "UG4", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "DSD"}, {"section": "UG4", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "DTCA"}, {"section": "UG4", "day": "Friday", "start": "11:00", "end": "12:00", "course": "RI"}, {"section": "UG3", "day": "Friday", "start": "14:15", "end": "15:15", "course": "ICPS"}, {"section": "UG3", "day": "Saturday", "start": "14:15", "end": "15:15", "course": "GENAI"}, {"section": "UG3", "day": "Saturday", "start": "15:15", "end": "16:15", "course": "GENAI"}], "self_study_allowed": true}, "112": {"type": "classroom", "schedule": [{"section": "UG3", "day": "Monday", "start": "11:00", "end": "12:00", "course": "FQC"}, {"section": "UG3", "day": "Monday", "start": "12:00", "end": "13:00", "course": "ASM"}, {"section": "UG3", "day": "Monday", "start": "16:30", "end": "17:30", "course": "IDHV"}, {"section": "UG3", "day": "Tuesday", "start": "08:45", "end": "09:45", "course": "FQC"}, {"section": "UG3", "day": "Tuesday", "start": "11:00", "end": "12:00", "course": "GDIT"}, {"section": "UG4", "day": "Tuesday", "start": "14:15", "end": "15:15", "course": "DTCA"}, {"section": "UG3", "day": "Tuesday", "start": "16:30", "end": "17:30", "course": "DIP"}, {"section": "UG3", "day": "Wednesday", "start": "08:45", "end": "09:45", "course": "GDIT"}, {"section": "UG3", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "IDHV"}, {"section": "UG4", "day": "Wednesday", "start": "14:15", "end": "15:15", "course": "DTCA"}, {"section": "UG3", "day": "Wednesday", "start": "15:15", "end": "16:15", "course": "FQC"}, {"section": "UG3", "day": "Thursday", "start": "09:45", "end": "10:45", "course": "DIP"}, {"section": "UG3", "day": "Thursday", "start": "14:15", "end": "15:15", "course": "GDIT"}, {"section": "UG3", "day": "Thursday", "start": "16:30", "end": "17:30", "course": "DIP"}, {"section": "UG3", "day": "Friday", "start": "09:45", "end": "10:45", "course": "IDHV"}, {"section": "UG3", "day": "Friday", "start": "15:15", "end": "16:15", "course": "ASM"}], "self_study_allowed": true}, "104": {"type": "classroom", "schedule": [{"section": "UG4", "day": "Monday", "start": "16:30", "end": "17:30", "course": "AE"}, {"section": "UG3", "day": "Tuesday", "start": "09:45", "end": "10:45", "course": "ASM"}, {"section": "UG4", "day": "Tuesday", "start": "15:15", "end": "16:15", "course": "CRYPTO"}, {"section": "UG4", "day": "Wednesday", "start": "09:45", "end": "10:45", "course": "CRYPTO"}, {"section": "UG3", "day": "Wednesday", "start": "12:00", "end": "13:00", "course": "PDS"}, {"section": "UG4", "day": "Thursday", "start": "11:00", "end": "12:00", "course": "AE"}, {"section": "UG4", "day": "Friday", "start": "11:00", "end": "12:00", "course": "DL&CV"}], "self_study_allowed": true}, "114/104": {"type": "lab", "schedule": [{"section": "UG3", "day": "Friday", "start": "11:00", "end": "12:00", "course": "MPMC"}, {"section": "UG3", "day": "Friday", "start": "12:00", "end": "13:00", "course": "MPMC"}], "self_study_allowed": false}}, "unresolved": [{"section": "UG1", "day": "Saturday", "start": "08:45", "end": "16:15", "course": "FHVE", "note": "All 5 UG1 sections have FHVE on Saturdays; room not specified on timetable."}, {"raw_label": "GENAI (UG4, Saturday)", "issue": "Room not specified on UG4 timetable for Saturday GENAI sessions."}, {"raw_label": "114/102 and 114/104", "issue": "Sheet lists these as combined/split lab codes across sections -- unclear if these are two rooms used together or a single dual-numbered lab. Unverified."}]};
+const CAL = {"meta": {"section": "UG1", "academic_year": "2026-27, Sem 1 (Monsoon 2026)", "note": "Transcribed from the UG1 almanac. Applies to UG1; other sections' calendars not yet provided -- assume same holidays/exam windows unless told otherwise."}, "holidays": [{"date": "2026-09-04", "name": "Janmashtami"}, {"date": "2026-09-14", "name": "Ganesh Chaturthi"}, {"date": "2026-10-02", "name": "Gandhi Jayanthi"}, {"date": "2026-10-20", "name": "Dussehra"}, {"date": "2026-11-08", "name": "Diwali"}], "weekly_off": ["Sunday"], "day_order_swaps": [{"date": "2026-10-08", "actual_weekday": "Thursday", "use_timetable_for": "Friday"}, {"date": "2026-10-09", "actual_weekday": "Friday", "use_timetable_for": "Thursday"}, {"date": "2026-10-21", "actual_weekday": "Wednesday", "use_timetable_for": "Friday"}, {"date": "2026-12-08", "actual_weekday": "Tuesday", "use_timetable_for": "Thursday"}], "class_work_start": "2026-09-07", "exam_periods": [{"name": "Mid Exam", "start": "2026-10-19", "end": "2026-10-24", "note": "Regular weekly timetable does not apply; exam room assignments not tracked in this dataset."}, {"name": "End Exam", "start": "2026-12-09", "end": "2026-12-15", "note": "Regular weekly timetable does not apply; Dec 13 (Sun) is a normal off day within this window."}, {"name": "Lab Exam", "start": "2026-12-16", "end": "2026-12-18", "note": "Regular weekly timetable does not apply."}], "other_events": [{"date": "2026-09-25", "name": "Performance Analysis-1"}, {"date": "2026-11-13", "name": "Performance Analysis-2"}, {"date": "2026-12-31", "name": "Performance Analysis-3"}, {"date": "2026-12-19", "name": "Paper Distribution"}, {"date": "2027-01-02", "name": "Re-exam (failed subjects only)"}, {"date": "2027-01-09", "name": "Re-exam (failed subjects only)"}, {"date": "2027-01-16", "name": "Re-exam (failed subjects only)"}, {"date": "2027-01-23", "name": "Re-exam (failed subjects only)"}, {"date": "2027-01-30", "name": "Re-exam (failed subjects only)"}, {"date": "2027-01-04", "name": "Start of S2027 Teaching"}], "vacation_start": "2026-12-21", "semester_end_used_for_app": "2026-12-31"};
+
+const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+function pad(n){return n.toString().padStart(2,"0");}
+function toMinutes(hhmm){const [h,m]=hhmm.split(":").map(Number); return h*60+m;}
+function dateKey(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+function nowHHMM(){const d=new Date(); return pad(d.getHours())+":"+pad(d.getMinutes());}
+
+function getEffectiveContext(now){
+  const key = dateKey(now);
+  const realDay = DAY_NAMES[now.getDay()];
+  let effectiveDay = realDay;
+  const banners = [];
+
+  const holiday = CAL.holidays.find(h => h.date === key);
+  if(holiday){
+    banners.push({type:"holiday", text: "<strong>"+holiday.name+"</strong> — campus-wide holiday, no classes today (per the UG1 calendar; assumed to apply college-wide)."});
+  }
+
+  const swap = CAL.day_order_swaps.find(s => s.date === key);
+  if(swap){
+    effectiveDay = swap.use_timetable_for;
+    banners.push({type:"swap", text: "Today (" + realDay + ") is running on the <strong>" + swap.use_timetable_for + "</strong> timetable (day-order swap)."});
+  }
+
+  const exam = CAL.exam_periods.find(e => key >= e.start && key <= e.end);
+  if(exam){
+    banners.push({type:"exam", text: "<strong>" + exam.name + "</strong> is on for UG1 (" + exam.start + " to " + exam.end + ") — their regular timetable is paused. Not yet confirmed for UG2–UG4."});
+  }
+
+  return {effectiveDay, holiday, exam, banners};
+}
+
+function isAfterHours(nowMin){
+  return nowMin >= toMinutes("18:30") || nowMin < toMinutes("08:45");
+}
+
+function computeStatus(room, effectiveDay, nowMin){
+  const todays = room.schedule.filter(s => s.day === effectiveDay)
+    .sort((a,b)=>toMinutes(a.start)-toMinutes(b.start));
+  const current = todays.find(s => nowMin >= toMinutes(s.start) && nowMin < toMinutes(s.end));
+  if(current){
+    return {free:false, current, freeFrom: current.end};
+  }
+  const next = todays.find(s => toMinutes(s.start) > nowMin);
+  return {free:true, until: next ? next.start : null};
+}
+
+let ctx = null;
+let minContinuous = 0;
+
+function render(){
+  const now = new Date();
+  document.getElementById("clock").textContent = DAY_NAMES[now.getDay()] + "  " +
+    pad(now.getHours())+":"+pad(now.getMinutes());
+
+  ctx = getEffectiveContext(now);
+  const {effectiveDay, holiday, banners} = ctx;
+  const nowMin = now.getHours()*60+now.getMinutes();
+  const afterHours = !holiday && isAfterHours(nowMin);
+
+  if(afterHours){
+    banners.push({type:"afterhours", text: "After 6:30 PM only two rooms stay open overnight, rotating nightly between <strong>G08/G09</strong> and <strong>G05/G06</strong> — the academic office tells security which pair each night, and this app doesn't have that feed yet. Everything else is locked, whatever the grid below might otherwise suggest."});
+  }
+
+  const bannerEl = document.getElementById("banners");
+  bannerEl.innerHTML = banners.map(b =>
+    '<div class="banner wrap ' + b.type + '">' + b.text + '</div>'
+  ).join("");
+
+  const roomEntries = Object.entries(ROOMS.rooms).sort((a,b)=>a[0].localeCompare(b[0]));
+  const grid = document.getElementById("roomGrid");
+  const freeList = document.getElementById("freeList");
+  grid.innerHTML = "";
+  const freeChips = [];
+
+  roomEntries.forEach(([code, room]) => {
+    const isLab = room.type === "lab";
+    let st;
+    if(holiday){
+      st = {free:true, until:null};
+    } else if(afterHours){
+      st = {restricted:true};
+    } else {
+      st = computeStatus(room, effectiveDay, nowMin);
+    }
+
+    const card = document.createElement("button");
+    card.className = "room-card";
+    let statusHtml;
+    if(st.restricted){
+      statusHtml = '<span class="status restricted">Ask security</span><span class="until">not on regular schedule right now</span>';
+    } else {
+      statusHtml = '<span class="status ' + (st.free?"free":"occupied") + '">' + (st.free?"Free":"Occupied") + '</span>' +
+        (st.free && st.until ? '<span class="until">until ' + st.until + '</span>' : '') +
+        (!st.free ? '<span class="until">' + st.current.course + ' (' + st.current.section + ') until ' + st.freeFrom + '</span>' : '');
+    }
+    card.innerHTML =
+      '<span class="room-code">' + code + '</span>' +
+      '<span class="type-badge ' + (isLab?"lab":"classroom") + '">' + (isLab ? "Lab" : "Classroom") + '</span>' +
+      statusHtml;
+    card.onclick = () => openModal(code, room);
+    grid.appendChild(card);
+
+    if(st.free){
+      const continuousMin = st.until ? (toMinutes(st.until) - nowMin) : Infinity;
+      if(continuousMin >= minContinuous){
+        const chip = document.createElement("button");
+        chip.className = "chip" + (isLab ? " lab" : "");
+        chip.textContent = code + (isLab ? " (lab)" : "") + (st.until ? " · until " + st.until : "");
+        chip.onclick = () => openModal(code, room);
+        freeChips.push(chip);
+      }
+    }
+  });
+
+  freeList.innerHTML = "";
+  if(afterHours){
+    freeList.innerHTML = '<span class="empty-note">Only the nightly-rotating pair is open — see the note above; this app doesn\'t know which pair yet.</span>';
+  } else if(freeChips.length === 0){
+    freeList.innerHTML = '<span class="empty-note">Nothing free right now' + (minContinuous>0 ? " for that long" : "") + '.</span>';
+  } else {
+    freeChips.forEach(c => freeList.appendChild(c));
+  }
+}
+
+function openModal(code, room){
+  const overlay = document.getElementById("overlay");
+  const modal = document.getElementById("modal");
+  const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const slots = ROOMS.meta.slot_times;
+  const {effectiveDay, holiday, exam} = ctx;
+  const curHHMM = nowHHMM();
+  const nowMin = toMinutes(curHHMM);
+
+  let rows = "";
+  slots.forEach(slot => {
+    const rowIsNowTime = !holiday && nowMin>=toMinutes(slot.start) && nowMin<toMinutes(slot.end);
+    rows += "<tr>";
+    rows += '<td class="slot-time' + (rowIsNowTime ? ' now-time' : '') + '">' + slot.start + '–' + slot.end + '</td>';
+    days.forEach(day => {
+      const entries = room.schedule.filter(s => s.day===day && s.start===slot.start);
+      const cellIsNow = rowIsNowTime && day===effectiveDay;
+      rows += '<td' + (cellIsNow ? ' class="now-cell"' : '') + '>';
+      if(entries.length===0){
+        rows += "—";
+      } else {
+        rows += entries.map(e => '<span class="entry">' + e.course + ' <span class="sec">' + e.section + '</span></span>').join("");
+      }
+      rows += "</td>";
+    });
+    rows += "</tr>";
+  });
+
+  let note = "";
+  if(room.type === "lab"){
+    note += '<div class="note-box lab">This is a lab — self-study isn\'t allowed here outside its scheduled sessions, even when the grid below shows it free.</div>';
+  }
+  if(holiday){
+    note += '<div class="note-box holiday">It\'s ' + holiday.name + ' — no classes anywhere on campus today. Enjoy the day off.</div>';
+  } else if(exam){
+    note += '<div class="note-box exam">' + exam.name + ' is underway for UG1 — this room\'s usual timetable is on pause, and exam room assignments aren\'t tracked here. It might be hosting an exam right now.</div>';
+  } else if(!holiday && isAfterHours(nowMin)){
+    note += '<div class="note-box restricted">It\'s past 6:30 PM — only one rotating pair of rooms (G08/G09 or G05/G06) stays open overnight, decided nightly by the academic office. This app doesn\'t know tonight\'s pair yet, so treat this room as locked unless you\'ve confirmed otherwise.</div>';
+  }
+
+  modal.innerHTML =
+    '<div class="modal-head">' +
+      '<div><h3>' + code + '</h3><span class="type-badge ' + (room.type==="lab"?"lab":"classroom") + '">' + (room.type==="lab"?"Lab":"Classroom") + '</span></div>' +
+      '<button class="close-btn" id="closeBtn" aria-label="Close">✕</button>' +
+    '</div>' +
+    note +
+    '<table class="week"><thead><tr><th>Time</th>' + days.map(d=>'<th' + (d===effectiveDay && !holiday ? ' class="today-col"' : '') + '>'+d.slice(0,3)+'</th>').join("") + '</tr></thead><tbody>' + rows + '</tbody></table>';
+
+  overlay.classList.add("open");
+  document.getElementById("closeBtn").onclick = closeModal;
+}
+
+function closeModal(){
+  document.getElementById("overlay").classList.remove("open");
+}
+
+const overlayEl = document.getElementById("overlay");
+overlayEl.addEventListener("mousedown", (e) => {
+  if(e.target === overlayEl) closeModal();
+});
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape") closeModal();
+});
+
+document.getElementById("hoursFilter").addEventListener("change", (e) => {
+  minContinuous = parseInt(e.target.value, 10);
+  render();
+});
+
+render();
+setInterval(render, 60000);
+</script>
+</body>
+</html>

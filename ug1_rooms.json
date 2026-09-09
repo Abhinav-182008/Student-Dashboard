@@ -1,0 +1,665 @@
+{
+  "meta": {
+    "section": "UG1",
+    "semester": "Monsoon 2026",
+    "valid_until": "2026-12-31",
+    "source": "UG1 timetable image (transcribed manually)",
+    "note": "Static weekly recurring schedule. Does NOT account for holidays, makeup classes, cancellations, or room reassignments. Verify manually for anything time-critical.",
+    "slots": [
+      {
+        "id": 1,
+        "start": "08:45",
+        "end": "09:45"
+      },
+      {
+        "id": 2,
+        "start": "09:45",
+        "end": "10:45"
+      },
+      {
+        "id": "break",
+        "start": "10:45",
+        "end": "11:00",
+        "label": "Break"
+      },
+      {
+        "id": 3,
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "id": 4,
+        "start": "12:00",
+        "end": "13:00"
+      },
+      {
+        "id": "lunch",
+        "start": "13:00",
+        "end": "14:15",
+        "label": "Lunch"
+      },
+      {
+        "id": 5,
+        "start": "14:15",
+        "end": "15:15"
+      },
+      {
+        "id": 6,
+        "start": "15:15",
+        "end": "16:15"
+      },
+      {
+        "id": "break2",
+        "start": "16:15",
+        "end": "16:30",
+        "label": "Break"
+      },
+      {
+        "id": 7,
+        "start": "16:30",
+        "end": "17:30"
+      },
+      {
+        "id": 8,
+        "start": "17:30",
+        "end": "18:30"
+      }
+    ]
+  },
+  "rooms": {
+    "G04": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD4"
+        },
+        {
+          "day": "Monday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DSMA5"
+        },
+        {
+          "day": "Saturday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EDL2"
+        },
+        {
+          "day": "Saturday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EDL2"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G05": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA1"
+        }
+      ],
+      "self_study_allowed": true
+    },
+    "G06": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP3"
+        },
+        {
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "CP1"
+        },
+        {
+          "day": "Friday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EE1"
+        },
+        {
+          "day": "Friday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EE1"
+        }
+      ]
+    },
+    "G07": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA3"
+        },
+        {
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DLD3"
+        },
+        {
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP3"
+        },
+        {
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA2"
+        },
+        {
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD3"
+        },
+        {
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA4"
+        },
+        {
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA3"
+        },
+        {
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA1"
+        },
+        {
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW3"
+        },
+        {
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA2"
+        },
+        {
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA2"
+        },
+        {
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OCW3"
+        }
+      ]
+    },
+    "G08": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW4"
+        },
+        {
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW1"
+        },
+        {
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA2"
+        },
+        {
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA3"
+        },
+        {
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA5"
+        },
+        {
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD2"
+        },
+        {
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD2"
+        },
+        {
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CP2"
+        },
+        {
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD3"
+        },
+        {
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OCW4"
+        },
+        {
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "OCW4"
+        },
+        {
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CP1"
+        },
+        {
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CP4"
+        },
+        {
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DSMA3"
+        },
+        {
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CP3"
+        },
+        {
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA1"
+        },
+        {
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DLD2"
+        },
+        {
+          "day": "Wednesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EE2"
+        },
+        {
+          "day": "Thursday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "EDL1"
+        },
+        {
+          "day": "Wednesday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EE2"
+        },
+        {
+          "day": "Thursday",
+          "start": "17:30",
+          "end": "18:30",
+          "course": "EDL1"
+        }
+      ]
+    },
+    "G09": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Friday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW1"
+        },
+        {
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OCW2"
+        },
+        {
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP1"
+        },
+        {
+          "day": "Friday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DSMA4"
+        },
+        {
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD1"
+        },
+        {
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD4"
+        },
+        {
+          "day": "Wednesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OCW1"
+        },
+        {
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD1"
+        },
+        {
+          "day": "Friday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "OCW2"
+        },
+        {
+          "day": "Wednesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA5"
+        },
+        {
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DSMA1"
+        },
+        {
+          "day": "Friday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP2"
+        },
+        {
+          "day": "Wednesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DLD4"
+        },
+        {
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DSMA2"
+        },
+        {
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "CP4"
+        },
+        {
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CP2"
+        },
+        {
+          "day": "Wednesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA4"
+        },
+        {
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DSMA5"
+        },
+        {
+          "day": "Tuesday",
+          "start": "16:30",
+          "end": "17:30",
+          "course": "DSMA4"
+        }
+      ]
+    },
+    "B03": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DLD1"
+        },
+        {
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "CP4"
+        }
+      ]
+    },
+    "B05": {
+      "type": "classroom",
+      "schedule": [
+        {
+          "day": "Thursday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW2"
+        }
+      ]
+    },
+    "103": {
+      "type": "lab",
+      "schedule": [
+        {
+          "day": "Monday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW1"
+        },
+        {
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CP4"
+        },
+        {
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "CP1"
+        },
+        {
+          "day": "Thursday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "OCW4"
+        },
+        {
+          "day": "Monday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OCW1"
+        },
+        {
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP4"
+        },
+        {
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "CP1"
+        },
+        {
+          "day": "Thursday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "OCW4"
+        },
+        {
+          "day": "Monday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CP3"
+        },
+        {
+          "day": "Thursday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "CP2"
+        },
+        {
+          "day": "Monday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP3"
+        },
+        {
+          "day": "Thursday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "CP2"
+        },
+        {
+          "day": "Monday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW2"
+        },
+        {
+          "day": "Tuesday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "OCW3"
+        },
+        {
+          "day": "Monday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OCW2"
+        },
+        {
+          "day": "Tuesday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "OCW3"
+        }
+      ]
+    },
+    "114/102": {
+      "type": "lab",
+      "note": "Sheet lists this as a combined/split lab code \u2014 unclear if 114 and 102 are two separate rooms used together or one dual-room lab. Flag as unverified until confirmed on-site.",
+      "schedule": [
+        {
+          "day": "Tuesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DLD1"
+        },
+        {
+          "day": "Wednesday",
+          "start": "08:45",
+          "end": "09:45",
+          "course": "DLD4"
+        },
+        {
+          "day": "Tuesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DLD1"
+        },
+        {
+          "day": "Wednesday",
+          "start": "09:45",
+          "end": "10:45",
+          "course": "DLD4"
+        },
+        {
+          "day": "Tuesday",
+          "start": "11:00",
+          "end": "12:00",
+          "course": "DLD3"
+        },
+        {
+          "day": "Tuesday",
+          "start": "12:00",
+          "end": "13:00",
+          "course": "DLD3"
+        },
+        {
+          "day": "Friday",
+          "start": "14:15",
+          "end": "15:15",
+          "course": "DLD2"
+        },
+        {
+          "day": "Thursday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DLD2"
+        },
+        {
+          "day": "Friday",
+          "start": "15:15",
+          "end": "16:15",
+          "course": "DLD2"
+        }
+      ]
+    }
+  },
+  "unresolved": [
+    {
+      "raw_label": "FHVE 12345",
+      "seen_on": "Saturday, slots 1-6",
+      "issue": "Room code '12345' doesn't match the building's numbering pattern anywhere else on the sheet \u2014 likely a placeholder, typo, or a code for an external/unlisted venue. Excluded from room lookups until confirmed."
+    }
+  ]
+}

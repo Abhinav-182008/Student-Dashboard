@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "section": "UG1",
+    "academic_year": "2026-27, Sem 1 (Monsoon 2026)",
+    "note": "Transcribed from the UG1 almanac. Applies to UG1; other sections' calendars not yet provided -- assume same holidays/exam windows unless told otherwise."
+  },
+  "holidays": [
+    {
+      "date": "2026-09-04",
+      "name": "Janmashtami"
+    },
+    {
+      "date": "2026-09-14",
+      "name": "Ganesh Chaturthi"
+    },
+    {
+      "date": "2026-10-02",
+      "name": "Gandhi Jayanthi"
+    },
+    {
+      "date": "2026-10-20",
+      "name": "Dussehra"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "Diwali"
+    }
+  ],
+  "weekly_off": [
+    "Sunday"
+  ],
+  "day_order_swaps": [
+    {
+      "date": "2026-10-08",
+      "actual_weekday": "Thursday",
+      "use_timetable_for": "Friday"
+    },
+    {
+      "date": "2026-10-09",
+      "actual_weekday": "Friday",
+      "use_timetable_for": "Thursday"
+    },
+    {
+      "date": "2026-10-21",
+      "actual_weekday": "Wednesday",
+      "use_timetable_for": "Friday"
+    },
+    {
+      "date": "2026-12-08",
+      "actual_weekday": "Tuesday",
+      "use_timetable_for": "Thursday"
+    }
+  ],
+  "class_work_start": "2026-09-07",
+  "exam_periods": [
+    {
+      "name": "Mid Exam",
+      "start": "2026-10-19",
+      "end": "2026-10-24",
+      "note": "Regular weekly timetable does not apply; exam room assignments not tracked in this dataset."
+    },
+    {
+      "name": "End Exam",
+      "start": "2026-12-09",
+      "end": "2026-12-15",
+      "note": "Regular weekly timetable does not apply; Dec 13 (Sun) is a normal off day within this window."
+    },
+    {
+      "name": "Lab Exam",
+      "start": "2026-12-16",
+      "end": "2026-12-18",
+      "note": "Regular weekly timetable does not apply."
+    }
+  ],
+  "other_events": [
+    {
+      "date": "2026-09-25",
+      "name": "Performance Analysis-1"
+    },
+    {
+      "date": "2026-11-13",
+      "name": "Performance Analysis-2"
+    },
+    {
+      "date": "2026-12-31",
+      "name": "Performance Analysis-3"
+    },
+    {
+      "date": "2026-12-19",
+      "name": "Paper Distribution"
+    },
+    {
+      "date": "2027-01-02",
+      "name": "Re-exam (failed subjects only)"
+    },
+    {
+      "date": "2027-01-09",
+      "name": "Re-exam (failed subjects only)"
+    },
+    {
+      "date": "2027-01-16",
+      "name": "Re-exam (failed subjects only)"
+    },
+    {
+      "date": "2027-01-23",
+      "name": "Re-exam (failed subjects only)"
+    },
+    {
+      "date": "2027-01-30",
+      "name": "Re-exam (failed subjects only)"
+    },
+    {
+      "date": "2027-01-04",
+      "name": "Start of S2027 Teaching"
+    }
+  ],
+  "vacation_start": "2026-12-21",
+  "semester_end_used_for_app": "2026-12-31"
+}
