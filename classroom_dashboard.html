@@ -198,6 +198,7 @@ try {
   .note-box{
     border:1px solid var(--line); padding:11px 13px; font-size:0.87rem; margin-bottom:18px; line-height:1.55;
   }
+  .note-box.current-class{background:var(--now-bg); border-color:var(--now); color:var(--gold-ink);}
   .note-box.lab{background:var(--lab-bg); border-color:var(--lab); color:var(--lab);}
   .note-box.holiday{background:var(--free-bg); border-color:var(--free); color:var(--free);}
   .note-box.exam{background:var(--now-bg); border-color:var(--now); color:var(--gold-ink);}
@@ -214,8 +215,41 @@ try {
   td.now-cell{background:var(--now-bg) !important; box-shadow:inset 0 0 0 2px var(--now);}
   td.now-time{background:var(--now-bg) !important; color:var(--gold-ink); font-weight:600;}
   footer{max-width:960px; margin:0 auto 50px; padding:18px 20px 0; border-top:1px solid var(--line); color:var(--ink-soft); font-size:0.8rem; line-height:1.65;}
+
+  .banner.exam{background:var(--occupied-bg); color:var(--occupied); border:1px solid var(--occupied); border-left-width:5px; padding:16px;}
+  .banner.exam strong{display:block; font-size:1rem; margin-bottom:5px;}
+  .timetable-scroll{width:100%; max-width:100%; overflow-x:auto; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;}
+  .timetable-scroll:focus-visible{outline:2px solid var(--now); outline-offset:2px;}
+  .timetable-scroll table.week{min-width:620px;}
+  .timetable-scroll th:first-child,.timetable-scroll td.slot-time{position:sticky; left:0; z-index:1;}
+  .timetable-hint{color:var(--ink-soft); font-size:.8rem; margin:0 0 10px;}
+  .modal{min-width:0; max-width: min(900px,100%);}
+  @media(max-width:600px){
+    .timetable-scroll table.week{table-layout:fixed;}
+    .timetable-scroll table.week th:first-child,
+    .timetable-scroll table.week td.slot-time{width:58px; min-width:58px; padding:7px 3px; text-align:center;}
+    .slot-time .time-start,.slot-time .time-end{display:block; line-height:1.5;}
+    .slot-time .time-separator{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%);}
+    .timetable-scroll table.week td{overflow-wrap:anywhere;}
+
+    header{padding:18px 12px; gap:14px;} header h1{font-size:1.3rem;}
+    .wrap{padding-left:12px; padding-right:12px;}
+    .banner{margin:14px 12px 0;}
+    .grid{grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px;}
+    .room-card{padding:10px 4px; min-width:0; text-align:center; overflow-wrap:anywhere;}
+    .room-code{font-size:1.15rem;}
+    .type-badge{font-size:.75rem; letter-spacing:0;}
+    .room-card .status{display:block; padding:4px 1px; font-size:.75rem; margin:8px 0 0;}
+    .room-card .until{font-size:.75rem;}
+    .room-card .teacher-name{display:none;}
+    .overlay{padding:12px 8px;}
+    .modal{padding:16px 12px; margin-bottom:12px;}
+    .modal-head h3{font-size:1.25rem;}
+    .schedule-filters{gap:10px;}
+    .close-btn{width:40px; height:40px;}
+  }
 </style>
-</head>
+<script src="calculator/page-state.js"></script></head>
 <body>
 
 <header>
@@ -287,6 +321,9 @@ try {
     <h2>Student resources</h2>
     <p>Useful academic and campus links for IIIT Sri City students.</p>
     <div class="resource-links">
+      <a class="resource-link" href="academic-points.html"><strong>Important academic points →</strong><span>Grades, earned credits, attendance, medical leave, exams and graduation rules.</span></a>
+      <a class="resource-link" href="attendance.html"><strong>Attendance calculator →</strong><span>UG1 missed lecture hours and lab sessions, calculated per subject.</span></a>
+      <a class="resource-link" href="calculator.html"><strong>CGPA & SGPA →</strong><span>Calculate grades, track each subject’s attendance, and save your semesters.</span></a>
       <a class="resource-link" href="https://pyqsbypa.online/" target="_blank" rel="noopener noreferrer">
         <strong>Previous-year papers ↗</strong>
         <span>Browse IIITS PYQs organized for student reference.</span>
@@ -392,6 +429,15 @@ const SENIOR_ALMANAC = {
   ]
 };
 
+const SENIOR_EXAM_PERIODS = [
+  {start:"2026-07-22",end:"2026-07-25",name:"Re-examinations"},
+  {start:"2026-09-07",end:"2026-09-12",name:"Mid Semester Examinations"},
+  {start:"2026-11-09",end:"2026-11-13",name:"End Semester Examinations"},
+  {start:"2026-11-15",end:"2026-11-21",name:"End Semester Examinations"},
+  {start:"2026-11-23",end:"2026-11-25",name:"Lab Examinations"},
+  ...[2,9,16,23,30].map(day => ({start:"2027-01-"+String(day).padStart(2,"0"),end:"2027-01-"+String(day).padStart(2,"0"),name:"Re-examinations"}))
+];
+
 const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 function pad(n){return n.toString().padStart(2,"0");}
@@ -417,11 +463,17 @@ function getEffectiveContext(now){
   }
 
   const exam = CAL.exam_periods.find(e => key >= e.start && key <= e.end);
-  if(exam){
-    banners.push({type:"exam", text: "<strong>" + exam.name + "</strong> is on (" + exam.start + " to " + exam.end + ") — regular timetable availability is not shown during this period."});
-  }
+  const activeExams = [
+    ...CAL.exam_periods.map(e => ({...e, group:"UG1"})),
+    ...SENIOR_EXAM_PERIODS.map(e => ({...e, group:"UG2–UG4"}))
+  ].filter(e => key >= e.start && key <= e.end);
+  activeExams.forEach(e => banners.unshift({type:"exam", text:
+    "<strong>Exam period · " + e.group + " · " + e.name + "</strong>" +
+    formatCalendarDate(e.start) + " – " + formatCalendarDate(e.end) +
+    "<br><b>Rooms may be reserved for exams</b>. Confirm room access before settling in; the regular timetable does not include exam-room assignments."
+  }));
 
-  return {effectiveDay, holiday, exam, banners};
+  return {effectiveDay, holiday, exam, banners, weekend: now.getDay() === 0 || now.getDay() === 6};
 }
 
 function isAfterHours(nowMin){
@@ -439,6 +491,12 @@ function computeStatus(room, effectiveDay, nowMin){
   return {free:true, until: next ? next.start : null};
 }
 
+function weekendRoomStatus(code, room, context, nowMin){
+  if(!/^[GB]0\d$/.test(code)) return {unavailable:true, closed:true};
+  const st=context.holiday ? {free:true,until:null} : computeStatus(room,context.effectiveDay,nowMin);
+  return {...st,weekend:true,remainingMinutes:st.free ? Math.min(st.until?toMinutes(st.until)-nowMin:Infinity,1440-nowMin):0};
+}
+
 function formatDuration(minutes){
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
@@ -449,7 +507,7 @@ function formatDuration(minutes){
 
 let ctx = null;
 let minContinuous = 0;
-const EVENING_AVAILABLE_ROOMS = new Set(["G05", "G06", "G08", "G09"]);
+const EVENING_AVAILABLE_ROOMS = new Set(["G07", "G08", "G09"]);
 const EVENING_ACCESS_START = toMinutes("18:30");
 const EVENING_ACCESS_END = toMinutes("01:30");
 
@@ -460,6 +518,7 @@ function eveningMinutesRemaining(nowMin){
 }
 
 function continuousMinutesAvailable(code, st, nowMin){
+  if(st.weekend) return st.remainingMinutes;
   const scheduledMinutes = st.remainingMinutes ?? (st.until ? (toMinutes(st.until) - nowMin) : Infinity);
   if(nowMin >= EVENING_ACCESS_START) return scheduledMinutes;
 
@@ -500,10 +559,11 @@ function render(){
   ctx = getEffectiveContext(now);
   const {effectiveDay, holiday, banners} = ctx;
   const nowMin = now.getHours()*60+now.getMinutes();
-  const afterHours = !holiday && isAfterHours(nowMin);
+  const afterHours = !ctx.weekend && !holiday && isAfterHours(nowMin);
+  if(ctx.weekend)banners.push({type:"afterhours",text:"<strong>Weekend access</strong> — only ground-floor (G0X) and basement (B0X) rooms are open. Other floors are <strong>Closed</strong>. Scheduled classes still apply in open rooms; lab self-study restrictions remain."});
 
   if(afterHours){
-    banners.push({type:"afterhours", text: "<strong>Evening access</strong> — from 6:30 PM to 1:30 AM, <strong>G05, G06, G08, and G09</strong> are shown as available. All other rooms are unavailable during this period."});
+    banners.push({type:"afterhours", text: "<strong>Evening access</strong> — from 6:30 PM to 1:30 AM, <strong>G07, G08, and G09</strong> are shown as available. All other rooms are unavailable during this period."});
   }
 
   const bannerEl = document.getElementById("banners");
@@ -523,12 +583,14 @@ function render(){
   const currentSubsectionFilter = document.getElementById("currentSubsectionFilter").value;
   const roomStates = roomEntries.map(([code, room]) => {
     let st;
-    if(holiday){
-      st = {free:true, until:null};
+    if(ctx.weekend){
+      st = weekendRoomStatus(code,room,ctx,nowMin);
     } else if(afterHours){
       st = EVENING_AVAILABLE_ROOMS.has(code)
         ? {free:true, until:"01:30", untilLabel:"1:30 AM", remainingMinutes:eveningMinutesRemaining(nowMin), evening:true}
         : {unavailable:true};
+    } else if(holiday){
+      st = {free:true, until:null};
     } else {
       st = computeStatus(room, effectiveDay, nowMin);
     }
@@ -548,7 +610,7 @@ function render(){
     card.className = "room-card";
     let statusHtml;
     if(st.unavailable){
-      statusHtml = '<span class="status unavailable">Unavailable</span><span class="until">after 6:30 PM</span>';
+      statusHtml = st.closed ? '<span class="status unavailable">Closed</span><span class="until">Weekend floor closure</span>' : '<span class="status unavailable">Unavailable</span><span class="until">after 6:30 PM</span>';
     } else {
       const currentEntries = st.currentEntries || [];
       const currentClasses = currentEntries.map(entry => entry.course + ' (' + entry.section + ')').join(' · ');
@@ -575,7 +637,7 @@ function render(){
 
   roomStates.forEach(({code, room, st}) => {
     const isLab = room.type === "lab";
-    if(st.free){
+    if(st.free && room.self_study_allowed !== false && !isLab){
       const continuousMin = continuousMinutesAvailable(code, st, nowMin);
       if(continuousMin >= minContinuous){
         const chip = document.createElement("button");
@@ -606,6 +668,21 @@ function subsectionOf(course){
   return match ? match[1] : null;
 }
 
+function focusTimetableDay(modal, day){
+  const dayIndex = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].indexOf(day);
+  const scroller = modal.querySelector(".timetable-scroll");
+  if(!scroller || dayIndex < 0) return;
+  requestAnimationFrame(() => {
+    if(!scroller.isConnected || scroller.scrollWidth <= scroller.clientWidth) return;
+    const headings = scroller.querySelectorAll("thead th");
+    const target = headings[dayIndex + 1];
+    if(!target) return;
+    const timeWidth = headings[0].getBoundingClientRect().width;
+    const offset = target.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft - timeWidth;
+    scroller.scrollLeft = Math.max(0, Math.min(offset, scroller.scrollWidth - scroller.clientWidth));
+  });
+}
+
 function openModal(code, room, filters={ug:"all", subsection:"all"}){
   const overlay = document.getElementById("overlay");
   const modal = document.getElementById("modal");
@@ -624,7 +701,7 @@ function openModal(code, room, filters={ug:"all", subsection:"all"}){
   slots.forEach(slot => {
     const rowIsNowTime = !holiday && nowMin>=toMinutes(slot.start) && nowMin<toMinutes(slot.end);
     rows += "<tr>";
-    rows += '<td class="slot-time' + (rowIsNowTime ? ' now-time' : '') + '">' + slot.start + '–' + slot.end + '</td>';
+    rows += '<td class="slot-time' + (rowIsNowTime ? ' now-time' : '') + '">' + '<span class="time-start">' + slot.start + '</span><span class="time-separator">–</span><span class="time-end">' + slot.end + '</span>' + '</td>';
     days.forEach(day => {
       const entries = room.schedule.filter(s =>
         s.day === day && s.start === slot.start &&
@@ -644,10 +721,23 @@ function openModal(code, room, filters={ug:"all", subsection:"all"}){
   });
 
   let note = "";
+  const weekendClosed = ctx.weekend && !/^[GB]0\d$/.test(code);
+  if(!weekendClosed && !holiday && (ctx.weekend || !isAfterHours(nowMin))){
+    const currentEntries = computeStatus(room, effectiveDay, nowMin).currentEntries || [];
+    if(currentEntries.length){
+      note += '<section class="note-box current-class" aria-label="Scheduled class details"><strong>Scheduled now</strong>' +
+        currentEntries.map(entry => '<p style="margin:8px 0 0;line-height:1.5;"><strong>' + entry.course + ' · ' + entry.section + '</strong> · until ' + entry.end +
+          '<span style="display:block;">Teacher: ' + (TEACHERS[entry.course] || 'Not listed') + '</span></p>').join('') + '</section>';
+    }
+  }
   if(room.type === "lab"){
     note += '<div class="note-box lab">This is a lab — self-study isn\'t allowed here outside its scheduled sessions, even when the grid below shows it free.</div>';
   }
-  if(holiday){
+  if(weekendClosed){
+    note += '<div class="note-box restricted"><strong>Closed for the weekend.</strong> Only G0X and B0X rooms are open on Saturdays and Sundays. The timetable below is a reference schedule.</div>';
+  } else if(ctx.weekend){
+    note += '<div class="note-box holiday">This floor is open under weekend access. Scheduled classes and lab restrictions still apply.</div>';
+  } else if(holiday){
     note += '<div class="note-box holiday">It\'s ' + holiday.name + ' — no classes anywhere on campus today. Enjoy the day off.</div>';
   } else if(exam){
     note += '<div class="note-box exam">' + exam.name + ' is underway for UG1 — this room\'s usual timetable is on pause, and exam room assignments aren\'t tracked here. It might be hosting an exam right now.</div>';
@@ -681,9 +771,10 @@ function openModal(code, room, filters={ug:"all", subsection:"all"}){
     '</div>' +
     note +
     scheduleFilters +
-    '<table class="week"><thead><tr><th>Time</th>' + days.map(d=>'<th' + (d===effectiveDay && !holiday ? ' class="today-col"' : '') + '>'+d.slice(0,3)+'</th>').join("") + '</tr></thead><tbody>' + rows + '</tbody></table>';
+    '<p class="timetable-hint">Swipe left or right to see all six days.</p><div class="timetable-scroll" role="region" aria-label="Weekly timetable, scroll to see all days" tabindex="0"><table class="week"><thead><tr><th>Time</th>' + days.map(d=>'<th' + (d===effectiveDay && !holiday ? ' class="today-col"' : '') + '>'+d.slice(0,3)+'</th>').join("") + '</tr></thead><tbody>' + rows + '</tbody></table></div>';
 
   overlay.classList.add("open");
+  focusTimetableDay(modal, effectiveDay);
   document.getElementById("closeBtn").onclick = closeModal;
   document.getElementById("scheduleUgFilter").addEventListener("change", (e) => {
     openModal(code, room, {ug:e.target.value, subsection:"all"});
@@ -703,7 +794,7 @@ function openBatchTimetable(ug, subsection){
   let rows = "";
 
   slots.forEach(slot => {
-    rows += '<tr><td class="slot-time">' + slot.start + '–' + slot.end + '</td>';
+    rows += '<tr><td class="slot-time">' + '<span class="time-start">' + slot.start + '</span><span class="time-separator">–</span><span class="time-end">' + slot.end + '</span>' + '</td>';
     days.forEach(day => {
       const entries = Object.entries(ROOMS.rooms).flatMap(([roomCode, room]) => room.schedule
         .filter(entry => entry.day === day && entry.start === slot.start && entry.section === ug &&
@@ -723,8 +814,9 @@ function openBatchTimetable(ug, subsection){
       '<div><h3>' + title + '</h3><p class="results-summary">Room codes appear beside each course.</p></div>' +
       '<button class="close-btn" id="closeBtn" aria-label="Close">✕</button>' +
     '</div>' +
-    '<table class="week"><thead><tr><th>Time</th>' + days.map(day => '<th' + (day === effectiveDay && !holiday ? ' class="today-col"' : '') + '>' + day.slice(0,3) + '</th>').join("") + '</tr></thead><tbody>' + rows + '</tbody></table>';
+    '<p class="timetable-hint">Swipe left or right to see all six days.</p><div class="timetable-scroll" role="region" aria-label="Weekly timetable, scroll to see all days" tabindex="0"><table class="week"><thead><tr><th>Time</th>' + days.map(day => '<th' + (day === effectiveDay && !holiday ? ' class="today-col"' : '') + '>' + day.slice(0,3) + '</th>').join("") + '</tr></thead><tbody>' + rows + '</tbody></table></div>';
   overlay.classList.add("open");
+  focusTimetableDay(modal, effectiveDay);
   document.getElementById("closeBtn").onclick = closeModal;
 }
 
